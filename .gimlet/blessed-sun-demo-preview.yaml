@@ -1,0 +1,24 @@
+app: demo-preview
+env: blessed-sun
+preview: true
+namespace: default
+chart:
+  repository: https://chart.onechart.dev
+  name: onechart
+  version: 0.70.0
+values:
+  gitRepository: giglr/demo
+  gitSha: '{{ .SHA }}'
+  image:
+    registry: public
+    strategy: static
+    tag: "1.27"
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      kubernetes.io/ingress.class: nginx
+    host: giglr-demo-ohrxfxbv.gimlet.app
+    tlsEnabled: true
+  replicas: 3
+  resources:
+    ignoreLimits: true
